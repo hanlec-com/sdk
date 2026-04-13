@@ -1,11 +1,10 @@
 import * as XJSON from "./xjson.js";
 
-const BASE_URL = process.env.HANLEC_BASE_URL ?? "https://hanlec.com";
+const SDKI_URL = process.env.HANLEC_SDKI_URL!;
+if (!SDKI_URL) throw new Error("Define HANLEC_SDKI_URL");
 
 const ACCESS_TOKEN = process.env.HANLEC_ACCESS_TOKEN;
-if (!ACCESS_TOKEN) {
-  throw new Error("Define HANLEC_ACCESS_TOKEN.");
-}
+if (!ACCESS_TOKEN) throw new Error("Define HANLEC_ACCESS_TOKEN.");
 
 /** @internal */
 export interface RequestOptions {
@@ -28,12 +27,12 @@ export async function request(
     headers.set("content-type", contentType);
   }
 
-  let url = `${BASE_URL}/sdki${path}`;
+  const url = new URL(SDKI_URL);
+  url.pathname = url.pathname + path;
   if (opts?.params) {
-    const entries = Object.entries(opts.params).filter(
-      (e): e is [string, string] => e[1] !== undefined,
-    );
-    if (entries.length) url += `?${new URLSearchParams(entries)}`;
+    for (const [key, value] of Object.entries(opts.params)) {
+      if (value !== undefined) url.searchParams.set(key, value);
+    }
   }
 
   const res = await fetch(url, {

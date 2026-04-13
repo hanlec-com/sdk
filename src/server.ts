@@ -2,11 +2,11 @@ import { createRequestHandler } from "react-router";
 // @ts-expect-error
 import * as build from "virtual:react-router/server-build";
 
+const APP_HOST = process.env.HANLEC_APP_HOST;
+
 const handler = createRequestHandler({
   ...build,
-  // TODO(vitor): CSRF. Em prod talvez seja possível fazer com isto venha do
-  // ambiente? v8_viteEnvironmentApi na Cloudflare?
-  allowedActionOrigins: ["**"],
+  allowedActionOrigins: APP_HOST != null ? APP_HOST : ["**"],
 });
 
 export default {
