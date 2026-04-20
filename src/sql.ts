@@ -1,4 +1,4 @@
-import { request } from "./api.js";
+import { request } from "./request.js";
 import * as XJSON from "./xjson.js";
 
 interface QueryResult<T = Record<string, unknown>> {

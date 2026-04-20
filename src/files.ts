@@ -1,4 +1,4 @@
-import { request } from "./api.js";
+import { request } from "./request.js";
 
 export interface ListOptions {
   prefix?: string;

@@ -16,7 +16,8 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "vitest run"
   },
   "dependencies": {
     "@remix-run/node-fetch-server": "^0.13.0",
@@ -30,7 +31,8 @@
   },
   "devDependencies": {
     "@types/node": "^24.12.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.4"
   },
   "publishConfig": {
     "access": "public"
