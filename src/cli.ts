@@ -28,7 +28,7 @@ cli
     console.log(`Created ${filepath}`);
   });
 
-cli.command("migrate", "Run pending migrations").action(async () => {
+cli.command("migration:up", "Run pending migrations").action(async () => {
   await sql`
     CREATE TABLE IF NOT EXISTS hanlec_migrations (
       name TEXT PRIMARY KEY,
